@@ -7,5 +7,9 @@ sites/site*/public/admin/
 sites/site*/public/setup/
 sites/site*/public/theme/
 textpattern/
+pyenv-beam/
 HISTORY.txt
 README.txt
+.idea/
+.vscode/
+*.sw*
