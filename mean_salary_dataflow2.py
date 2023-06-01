@@ -5,6 +5,8 @@ from apache_beam.io import ReadFromText
 from apache_beam.io import WriteToText
 from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.options.pipeline_options import SetupOptions
+import apache_beam as beam
+import matplotlib.pyplot as plt
 import apache_beam.dataframe as df
 import apache_beam as beam
 import apache_beam.runners.interactive.interactive_beam as ib
@@ -35,7 +37,10 @@ def try_float(value):
         return float(value)
     except ValueError:
         return None
-     
+    
+  
+   
+#-----------------------------------------------------------------------------------        
 def run(argv=None, save_main_session=True):
   """Main entry point; defines and runs the wordcount pipeline."""
   parser = argparse.ArgumentParser()
