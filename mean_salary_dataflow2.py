@@ -7,11 +7,6 @@ from apache_beam.io import ReadFromText
 from apache_beam.io import WriteToText
 from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.options.pipeline_options import SetupOptions
-
-
-import apache_beam as beam
-import pandas as pd
-import matplotlib.pyplot as plt
 import apache_beam.dataframe as df
 import apache_beam as beam
 
