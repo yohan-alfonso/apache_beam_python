@@ -69,10 +69,19 @@ def run(argv=None, save_main_session=True):
         | 'TransformData' >> beam.Map(lambda columns: {'initial_sal': try_float(columns[0]), 'final_sal': try_float(columns[1]), 'mean_sal': try_float(columns[2]),'job_type': columns[3]})
         
         )
-
-    output = counts | 'Format' >> beam.Map(transformed_data)
+        #output = counts | 'Format' >> beam.Map(transformed_data)
+    schema = 'initial_sal:float, final_sal:float, mean_sal:float, job_type:STRING'
+        
+    transformed_data | 'Write to BigQuery' >> WriteToBigQuery(
+        table=table_id,
+        dataset=dataset_id,
+        project=project_id,
+        schema=schema,
+        create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
+        write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND
+    )
     
-    output | 'Write' >> WriteToText(known_args.output)
+    #output | 'Write' >> WriteToText(known_args.output)
 
 if __name__ == '__main__':
   logging.getLogger().setLevel(logging.INFO)
