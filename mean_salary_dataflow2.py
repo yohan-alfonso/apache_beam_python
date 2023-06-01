@@ -73,9 +73,9 @@ def run(argv=None, save_main_session=True):
     schema = 'initial_sal:float, final_sal:float, mean_sal:float, job_type:STRING'
         
     transformed_data | 'Write to BigQuery' >> WriteToBigQuery(
-        table=table_id,
-        dataset=dataset_id,
-        project=project_id,
+        table=beam-text-to-bigquery.beamoutput.mean_salary,
+        dataset=beam-text-to-bigquery.beamoutput,
+        project=beam-text-to-bigquery,
         schema=schema,
         create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
         write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND
