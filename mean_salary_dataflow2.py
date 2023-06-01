@@ -70,16 +70,23 @@ def run(argv=None, save_main_session=True):
         
         )
         #output = counts | 'Format' >> beam.Map(transformed_data)
-    schema = 'initial_sal:float, final_sal:float, mean_sal:float, job_type:STRING'
         
-    transformed_data | 'Write to BigQuery' >> WriteToBigQuery(
-        table=beam-text-to-bigquery.beamoutput.mean_salary,
-        dataset=beam-text-to-bigquery.beamoutput,
-        project=beam-text-to-bigquery,
-        schema=schema,
-        create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
-        write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND
-    )
+    schema = 'initial_sal:float, final_sal:float, mean_sal:float, job_type:STRING'
+    
+    transformed_data | beam.io.WriteToBigQuery(
+    beam-text-to-bigquery.beamoutput.mean_salary,
+    schema=schema,
+    write_disposition=beam.io.BigQueryDisposition.WRITE_TRUNCATE,
+    create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED)
+        
+    # transformed_data | 'Write to BigQuery' >> WriteToBigQuery(
+    #     table=beam-text-to-bigquery.beamoutput.mean_salary,
+    #     dataset=beam-text-to-bigquery.beamoutput,
+    #     project=beam-text-to-bigquery,
+    #     schema=schema,
+    #     create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
+    #     write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND
+    # )
     
     #output | 'Write' >> WriteToText(known_args.output)
 
